@@ -1,0 +1,45 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DAOs.UsuarioDAO;
+import JDBC.ConnectionFactory;
+import modelos.Usuario;
+
+
+@WebServlet("/adicionarComentario")
+public class AdicionarComentario extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			PreparedStatement stm = c.prepareStatement("insert into comentario"
+					+ "(comentario, login, id_topico) VALUES (?, ?, ?)");
+			stm.setString(1, request.getParameter("comentario"));
+			stm.setString(2, request.getParameter("login"));
+			int topicoID = Integer.parseInt(request.getParameter("id_topico"));
+			stm.setInt(3, topicoID);
+			stm.executeUpdate();
+			
+			Usuario u = new UsuarioDAO().getUsuario(request.getParameter("login"));
+			PreparedStatement stmUsuario = c.prepareStatement("UPDATE usuario SET "
+					+ "pontos=pontos+3 WHERE login=?");
+			stmUsuario.setString(1, u.getLogin());
+			stmUsuario.executeUpdate();
+			
+			request.getRequestDispatcher("exibir?topicoID="+topicoID).forward(request, response);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}

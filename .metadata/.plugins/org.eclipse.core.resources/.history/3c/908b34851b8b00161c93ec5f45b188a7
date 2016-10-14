@@ -1,0 +1,46 @@
+package DAOs;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import JDBC.ConnectionFactory;
+import modelos.Usuario;
+
+public class UsuarioDAO {
+
+	public Usuario getUsuario(String login) throws Exception {
+		Usuario usuario = new Usuario();
+
+		try (Connection c = ConnectionFactory.getConexao()) {
+			PreparedStatement stm = c.prepareStatement("select * from usuario where login=?");
+			stm.setString(1, login);
+			ResultSet rs = stm.executeQuery();
+
+			rs.next();
+			usuario.setEmail(rs.getString("email"));
+			usuario.setNome(rs.getString("nome"));
+			usuario.setLogin(rs.getString("login"));
+			usuario.setSenha(rs.getString("senha"));
+			usuario.setPontos(rs.getInt("pontos"));
+			return usuario;
+		} catch (Exception e) {
+			throw new Exception("Erro ao recuperar usuário", e);
+		}
+	}
+	
+	public List<Usuario> getUsuarios(){
+		List<Usuario> lista = new ArrayList<>();
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			PreparedStatement stm = c.prepareStatement("select * from usuario order by pontos desc");
+			ResultSet rs 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return list;
+	}
+}

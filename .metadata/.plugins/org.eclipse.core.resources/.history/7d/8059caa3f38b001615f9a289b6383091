@@ -1,0 +1,40 @@
+package testes;
+
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
+import org.junit.Before;
+import org.junit.Test;
+
+import DAOs.ComentarioDAO;
+import modelos.Comentario;
+
+public class TesteComentario {
+
+	JdbcDatabaseTester jdt;
+	
+	@Before
+	public void setUp() throws Exception {
+		jdt = new JdbcDatabaseTester("org.postgresql.Driver",
+				"jdbc:postgresql://localhost/forum", "postgres", "senha");
+		FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+		jdt.setDataSet(loader.load("/inicio.xml"));
+		jdt.onSetup();
+	}
+
+	@Test
+	public void recuperarUmTopico(){
+		Topico top = new To
+	}
+	
+	
+	@Test
+	public void recuperarTodosTopicos() {
+		List<Comentario> lista = new ComentarioDAO().getComentariosTopico(1);
+		assertEquals(2, lista.size());
+	}
+
+}

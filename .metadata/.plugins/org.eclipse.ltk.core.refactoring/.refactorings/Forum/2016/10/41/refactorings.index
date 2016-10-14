@@ -1,0 +1,17 @@
+1475519050439	Delete element
+1475520052077	Rename type 'Login'
+1475522620394	Delete element
+1475530877774	Rename resource 'index.jsp'
+1475600789573	Rename local variable 'sql'
+1475600822045	Rename local variable 'stm'
+1475688534008	Rename method 'getTopicos'
+1475695071937	Rename type 'AdicionarTopicoServlet'
+1475695078069	Rename type 'CadastrarServlet'
+1475695084138	Rename type 'ExibirTopicoServlet'
+1475695089376	Rename type 'LoginServlet'
+1475695094010	Rename type 'RankingServlet'
+1475695099125	Rename type 'TopicosServlet'
+1475697473057	Delete element
+1475773200750	Rename type 'TesteDBunit'
+1475773354668	Delete element
+1475778922281	Rename compilation unit 'TesteComentario.java'

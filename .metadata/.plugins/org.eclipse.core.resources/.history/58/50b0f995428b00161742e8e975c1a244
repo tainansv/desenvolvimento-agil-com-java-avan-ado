@@ -1,0 +1,48 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import JDBC.ConnectionFactory;
+import modelos.Usuario;
+
+@WebServlet("/adicionarTopico")
+public class AdicionarTopico extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		try(Connection c = ConnectionFactory.getConexao()) {
+			
+			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+			
+			PreparedStatement stmTopico = c.prepareStatement("INSERT INTO topico(titulo,"
+					+ " conteudo, login) VALUES (?, ?, ?);");
+			stmTopico.setString(1, request.getParameter("titulo"));
+			stmTopico.setString(2, request.getParameter("conteudo"));
+			stmTopico.setString(3, usuario.getLogin());
+			stmTopico.executeUpdate();
+			
+			PreparedStatement stmUsuario = c.prepareStatement("UPDATE usuario SET "
+					+ "pontos=pontos+10 WHERE login=?");
+			stmUsuario.setString(1, usuario.getLogin());
+			stmUsuario.executeUpdate();
+			
+			request.getRequestDispatcher("topicos").forward(request, response);
+		} catch (SQLException e) {
+			System.out.println("Erro ao adicionar topico no banco de dados");
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+
+}

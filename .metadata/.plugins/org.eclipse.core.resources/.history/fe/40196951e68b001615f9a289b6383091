@@ -1,0 +1,28 @@
+package testes;
+
+import static org.junit.Assert.*;
+
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.util.fileloader.FlatXmlDataFileLoader;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TesteDBunit {
+
+	JdbcDatabaseTester jdt;
+	
+	@Before
+	public void setUp() throws Exception {
+		jdt = new JdbcDatabaseTester("org.postgresql.Driver",
+				"jdbc:postgresql://localhost/forum", "postgres", "senha");
+		FlatXmlDataFileLoader loader = new FlatXmlDataFileLoader();
+		jdt.setDataSet(loader.load("/inicio.xml"));
+		jdt.onSetup();
+	}
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Exibir tópico</title>
+</head>
+<body>
+
+	<h2>Exibindo tópico:</h2>
+	Título: ${topico.titulo }<br>
+	Autor:  ${topicoUsuario.nome }<br>
+	Conteúdo:<br>
+	${topico.conteudo }
+	<br><br>
+	
+	<h3>Comentários:</h3>
+	<p >
+		<c:forEach var="autor" items="${autores }" varStatus="id">
+			Nome: ${autor.nome }
+		</c:forEach>
+		<c:forEach var="comentario" items="${comentarios }">
+			Comentario:<br>
+			${comentario.comentario }<br><br>
+		</c:forEach>
+	</p>
+	
+	<h4>Adicionar Comentário:</h4>
+	<form action="adicionarComentario">
+		<br><textarea rows="8" cols="50" name="comentario" placeholder="Digite o conteúdo..."></textarea>
+		<input type="hidden" name="login" value="${usuario.login }"/>
+		<input type="hidden" name="id_topico" value="${topico.id }"/>
+		<br><input type="submit" value="adicionar"/>
+	</form>
+	
+	<form action="topicos"><input type="submit" value="Retornar aos tópicos"/></form>
+
+</body>
+</html>

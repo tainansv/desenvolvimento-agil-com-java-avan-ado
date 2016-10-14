@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<usuario login="karen" email="karen@email.com" nome="Karen Santos" senha="senha" pontos="28"></usuario>
+	<usuario login="lany" email="lany@email.com" nome="Kailany Valentim" senha="senha" pontos="40"></usuario>
+	<usuario login="tainan" email="tainan@email.com" nome="Tainan Valentim" senha="senha" pontos="30"></usuario>
+</dataset>

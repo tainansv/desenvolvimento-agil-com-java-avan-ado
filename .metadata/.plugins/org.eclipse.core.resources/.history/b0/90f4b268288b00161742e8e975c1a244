@@ -1,0 +1,39 @@
+package servlets;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DAOs.TopicosDAO;
+import DAOs.UsuarioDAO;
+import modelos.Topico;
+import modelos.Usuario;
+
+@WebServlet("/exibir")
+public class ExibirTopicoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			System.out.println(request.getAttribute("topico"));
+			Topico topico = (Topico) request.getAttribute("topico");
+			System.out.println(topico.getLogin());
+			Usuario usuario = new UsuarioDAO().getUsuario(topico.getLogin());
+			request.setAttribute("topicoUsuario", usuario);
+			request.getRequestDispatcher("exibe-topico.jsp").forward(request, response);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
+}

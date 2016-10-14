@@ -1,0 +1,45 @@
+package DAOs;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import JDBC.ConnectionFactory;
+import modelos.Comentario;
+
+public class ComentarioDAO {
+
+	public List<Comentario> getComentariosTopico(int id) throws Exception{
+		List<Comentario> comentarios = new ArrayList<>();
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			PreparedStatement stm = c.prepareStatement("select * from comentario"
+					+ " where id_topico=?");
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				Comentario com = new Comentario();
+				
+				PreparedStatement pegarAutor = c.prepareStatement("select nome from usuario where login=?");
+				pegarAutor.setString(1, rs.getString("login"));
+				ResultSet autor = pegarAutor.executeQuery();
+				autor.next();
+				
+				com.setAutor(autor.getString("nome"));
+				com.setComentario(rs.getString("comentario"));
+				com.setLogin(rs.getString("login"));
+				com.setId_comentario(rs.getInt("id_comentario"));
+				com.setId_topico(rs.getInt("id_topico"));
+				comentarios.add(com);
+			}
+			
+			return comentarios;
+		} catch (Exception e) {
+			throw new Exception("Erro ao recuperar comentários", e);
+		}
+	}
+
+}

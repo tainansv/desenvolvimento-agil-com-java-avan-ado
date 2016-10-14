@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;forum-gamification&apos;" deleteContents="true" description="Delete resource &apos;forum-gamification&apos;" element1="/forum-gamification" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1476123813723"/>
+</session>

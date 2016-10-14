@@ -1,0 +1,34 @@
+package DAOs;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import JDBC.ConnectionFactory;
+import modelos.Topico;
+
+public class TopicosDAO {
+
+	public List<Topico> getTopicos(){
+		List<Topico> topicos = new ArrayList<>();
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			String sql = "select * from topico";
+			PreparedStatement stm = c.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				Topico topico = new Topico();
+				topico.setId(rs.getInt("pontos"));
+				topico.setLogin(rs.getString("login"));
+				topico
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return topicos;
+	}
+}

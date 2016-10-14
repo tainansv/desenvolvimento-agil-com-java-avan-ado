@@ -1,0 +1,7 @@
+INDEX VERSION 1.3+C:\Users\taina\Documents\Git\coursera\Programação java e desenvolvimento ágil\c3 - Desenvolvimento agil com java avançado\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3766048777.index
+1734703654.index
+1212551163.index
+298232364.index
+2884544701.index
+614031578.index

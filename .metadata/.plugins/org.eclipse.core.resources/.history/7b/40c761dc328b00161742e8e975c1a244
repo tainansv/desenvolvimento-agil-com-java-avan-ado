@@ -1,0 +1,36 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import JDBC.ConnectionFactory;
+
+
+@WebServlet("/adicionarComentario")
+public class AdicionarComentario extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			PreparedStatement stm = c.prepareStatement("insert into comentario"
+					+ "(comentario, login, id_topico) VALUES (?, ?, ?)");
+			stm.setString(1, request.getParameter("comentario"));
+			stm.setString(2, request.getParameter("login"));
+			stm.setInt(3, Integer.parseInt(request.getParameter("id_topico")));
+			stm.executeUpdate();
+			
+			request.getRequestDispatcher(arg0)
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}

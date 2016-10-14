@@ -1,0 +1,18 @@
+package JDBC;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionFactory {
+
+	public static Connection getConexao() throws Exception{
+		try {
+			Connection conexao = DriverManager.getConnection(
+					"jdbc:postgre://localhost/forum", "root", "senha");
+			return conexao;
+		} catch (SQLException e) {
+			throw new Exception("Erro ao acessar banco de dados", e);
+		}
+	}
+}

@@ -1,0 +1,31 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import JDBC.ConnectionFactory;
+
+@WebServlet("/adicionar")
+public class AdicionarTopicoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		try(Connection c = ConnectionFactory.getConexao()) {
+			String sql = "INSERT INTO topico(titulo, conteudo, login)"
+					+ "	VALUES (?, ?, ?);";
+			PreparedStatement stm = c.prepareStatement(sql);
+			stm.setString(1, );
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}

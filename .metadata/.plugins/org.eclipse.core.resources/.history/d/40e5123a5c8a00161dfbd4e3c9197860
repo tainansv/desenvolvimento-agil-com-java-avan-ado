@@ -1,0 +1,48 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import JDBC.ConnectionFactory;
+import DAOs.TopicosDAO;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try(Connection c = ConnectionFactory.getConexao()){
+			
+			String sql = "select nome from usuario where login=? and senha=?";
+			PreparedStatement stm = c.prepareStatement(sql);
+			stm.setString(1, request.getParameter("login"));
+			stm.setString(2, request.getParameter("senha"));
+			ResultSet rs = stm.executeQuery();
+			
+			if(rs.next()){
+				request.setAttribute("nome", rs.getString("nome"));
+				request.setAttribute("topicos", new TopicosDAO().getTopicos());
+				request.getRequestDispatcher("topicos.jsp").forward(request, response);
+			}else{
+				request.setAttribute("erro", "Login ou senha incorretos. Tente novamente.");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+}

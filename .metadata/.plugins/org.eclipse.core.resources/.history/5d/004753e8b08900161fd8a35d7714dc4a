@@ -1,0 +1,12 @@
+package DAOs;
+
+import java.util.List;
+
+import modelos.Topico;
+
+public class TopicosDAO {
+
+	public List<Topico> getTopicos(){
+		
+	}
+}

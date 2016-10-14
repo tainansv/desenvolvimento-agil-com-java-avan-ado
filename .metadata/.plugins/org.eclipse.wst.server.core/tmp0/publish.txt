@@ -1,0 +1,8 @@
+#Tomcat publish data
+#Fri Oct 07 14:00:34 BRT 2016
+org.eclipse.jst.jee.server\:Forum=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\Forum
+org.eclipse.jst.jee.server\:Login=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\Login
+org.eclipse.jst.jee.server\:OraculoMVC=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\OraculoMVC
+org.eclipse.jst.jee.server\:Tradutor=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\Tradutor
+org.eclipse.jst.jee.server\:ConversaoTemperatura=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\ConversaoTemperatura
+org.eclipse.jst.jee.server\:ContadoresEscopo=C\:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 8.0\\wtpwebapps\\ContadoresEscopo

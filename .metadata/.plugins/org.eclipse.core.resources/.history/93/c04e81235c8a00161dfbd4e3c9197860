@@ -1,0 +1,46 @@
+package servlets;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import JDBC.ConnectionFactory;
+
+
+@WebServlet("/cadastrar")
+public class CadastrarServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try(Connection c = ConnectionFactory.getConexao()) {
+			String sql = "insert into usuario(login, email, nome, senha, pontos)"
+					+ " values(?, ?, ?, ?, ?);";
+			PreparedStatement stm = c.prepareStatement(sql);
+			stm.setString(1, request.getParameter("login"));
+			stm.setString(2, request.getParameter("email"));
+			stm.setString(3, request.getParameter("nome"));
+			stm.setString(4, request.getParameter("senha"));
+			stm.setInt(5, 0);
+			
+			stm.executeUpdate();
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
+
+
+}
